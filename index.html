@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Vibes - Orlando Owen Tan</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header id="mainHeader">
+    <div class="logo"><i class="fas fa-brain"></i> Smart Vibes</div>
+
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <nav class="nav-container">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#tips">Tips</a></li>
+        <li><a href="#gayabelajar">Quiz</a></li>
+        <li><a href="#todo">Target</a></li>
+        <li><a href="#pomodoro">Timer</a></li>
+        <li><a href="#notes">Notes</a></li>
+        <li><a href="#schedule">Jadwal</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="home" class="hero">
+    <video autoplay muted loop id="heroVideo">
+      <source src="Video/bg.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <h1 class="fade-in">Master Your <br><span class="accent">Future</span></h1>
+      <p class="fade-in">Kelola waktu dan gaya belajarmu dalam satu tempat secara efisien.</p>
+      <button id="motivateBtn" class="btn-glow fade-in">
+        <i class="fas fa-bolt"></i> Motivasi Hari Ini
+      </button>
+      <div class="quote-glass fade-in">
+        <p id="quoteText">"Siap untuk menaklukkan tantangan hari ini?"</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tips" class="section fade-in">
+    <div class="container">
+      <h2 class="title-center">Tips Belajar Pintar</h2>
+
+      <div class="tips-container">
+        <div class="tip-card glass-card">
+          <img src="Foto/1.jpg" alt="Belajar rutin">
+          <h3>Belajar Efektif</h3>
+          <p>Tips belajar efektif yang memudahkan kalian untuk memahami materi.</p>
+          <div class="btn-group">
+            <a href="https://telkomuniversity.ac.id/cara-belajar-efektif-dan-efisien-dari-sisi-pandang-psikologi/" target="_blank" class="visit-btn">Baca Selengkapnya</a>
+          </div>
+        </div>
+
+        <div class="tip-card glass-card">
+          <img src="Foto/penerbit-buku-digital.jpg" alt="Waktu fokus">
+          <h3>Buku Digital</h3>
+          <p>Tingkatkan skill literasimu dengan memulai hal-hal kecil setiap hari seperti membaca buku.</p>
+          <a href="https://budi.kemendikdasmen.go.id/buku?tipe=2fd97285-08d0-4d81-83f2-582f0e8b0f36" class="visit-btn">Open Digital Book Library</a>
+        </div>
+
+        <div class="tip-card glass-card">
+          <img src="Foto/Lingkungan belajar.jpg" alt="Istirahat cukup">
+          <h3>Lingkungan Belajar</h3>
+          <p>Lingkungan belajar yang baik dapat berdampak dalam proses belajar kita.</p>
+          <a href="https://pgsd.fip.unesa.ac.id/post/pentingnya-lingkungan-belajar-yang-aman-dan-nyaman" class="visit-btn">Baca Selengkapnya</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gayabelajar" class="section fade-in">
+    <div class="container">
+      <div class="glass-card quiz-box">
+        <h2>Cek Gaya Belajar</h2>
+        <p>Bagaimana caramu paling mudah memahami materi baru?</p>
+
+        <div class="quiz-options">
+          <button class="opt" onclick="selectOption(this, 'visual')">Melihat infografis atau video</button>
+          <button class="opt" onclick="selectOption(this, 'auditori')">Mendengarkan penjelasan</button>
+          <button class="opt" onclick="selectOption(this, 'kinestetik')">Mempraktikkan langsung</button>
+        </div>
+
+        <button onclick="calculateResult()" class="btn-primary" style="margin-top: 20px; width: 100%;">Lihat Hasil</button>
+        <div id="quizResult" class="result"></div>
+      </div>
+    </div>
+  </section>
+
+    <section id="todo" class="section fade-in">
+    <div class="container">
+      <div class="glass-card todo-card">
+        <h2><i class="fas fa-list-check"></i> Target Belajar</h2>
+        <div class="input-group">
+          <input type="text" id="todoInput" placeholder="Tambah tugas baru...">
+          <button onclick="addTodo()" class="btn-add">Tambah</button>
+        </div>
+        <ul id="todoList"></ul>
+      </div>
+    </div>
+  </section>
+
+    <section id="pomodoro" class="section fade-in">
+    <div class="container">
+      <div class="glass-card pomodoro-box">
+        <h2 class="title-center">Timer Belajar</h2>
+        <p class="timer-text">Klik angkanya lalu ketik waktu yang kamu mau.</p>
+
+        <div class="timer-box">
+          <div class="timer-input-display">
+            <input type="number" id="timerHours" min="0" max="23" value="0" aria-label="Jam">
+            <span>:</span>
+            <input type="number" id="timerMinutes" min="0" max="59" value="25" aria-label="Menit">
+            <span>:</span>
+            <input type="number" id="timerSeconds" min="0" max="59" value="0" aria-label="Detik">
+          </div>
+        </div>
+
+        <div class="timer-controls">
+          <button onclick="startTimer()" id="startBtn" class="btn-timer"><i class="fas fa-play"></i> Start</button>
+          <button onclick="pauseTimer()" id="pauseBtn" class="btn-timer"><i class="fas fa-pause"></i> Pause</button>
+          <button onclick="resetTimer()" id="resetBtn" class="btn-timer"><i class="fas fa-redo"></i> Reset</button>
+        </div>
+
+        <p class="hint">Kalau waktunya habis, timer akan bunyi otomatis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes" class="section fade-in">
+  <div class="container">
+    <div class="glass-card">
+      <h2><i class="fas fa-sticky-note"></i> Management Notes</h2>
+      <div class="input-group-vertical">
+        <input type="text" id="noteTitle" placeholder="Judul Catatan...">
+        <div class="note-toolbar">
+          <button type="button" class="toolbar-btn" onclick="formatNote('bold')"><i class="fas fa-bold"></i></button>
+          <button type="button" class="toolbar-btn" onclick="formatNote('italic')"><i class="fas fa-italic"></i></button>
+          <button type="button" class="toolbar-btn" onclick="formatNote('underline')"><i class="fas fa-underline"></i></button>
+        </div>
+        <div id="noteInput" class="note-editor" contenteditable="true" data-placeholder="Tulis isi catatan di sini..."></div>
+        <button onclick="addNote()" class="btn-primary">Simpan Catatan Baru</button>
+      </div>
+      <div id="notesContainer" style="margin-top: 30px;"></div>
+    </div>
+  </div>
+</section>
+
+ <section id="schedule" class="section fade-in">
+    <div class="container">
+      <h2 class="title-center"><i class="fa-regular fa-calendar"></i> Your schedule</h2>
+
+      <div class="glass-card calendar-card">
+        <div class="calendar-topbar">
+          <div>
+            <p class="calendar-label">Pilih tanggal untuk lihat tugas</p>
+            <h3 id="calendarMonthLabel">April 2026</h3>
+          </div>
+
+          <div class="calendar-nav">
+            <button type="button" class="btn-timer" onclick="changeMonth(-1)"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="btn-timer" onclick="changeMonth(1)"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+
+        <div class="schedule-layout">
+          <div class="calendar-part">
+            <div class="calendar-weekdays">
+              <span>Min</span>
+              <span>Sen</span>
+              <span>Sel</span>
+              <span>Rab</span>
+              <span>Kam</span>
+              <span>Jum</span>
+              <span>Sab</span>
+            </div>
+            <div id="calendarGrid" class="calendar-grid"></div>
+          </div>
+
+          <div class="schedule-sidepanel">
+            <form id="scheduleForm" class="schedule-form">
+              <h3>Tambah Jadwal</h3>
+              <input type="date" id="scheduleDate" required>
+              <input type="text" id="scheduleTask" placeholder="Tugas / Pelajaran" required>
+              <input type="time" id="scheduleTime" required>
+              <button type="submit" class="btn-primary">Tambah</button>
+            </form>
+
+            <div class="selected-day-card">
+              <p class="calendar-label">Tugas pada tanggal</p>
+              <h3 id="selectedDateTitle">Pilih tanggal dulu</h3>
+              <div id="selectedDateTasks" class="selected-date-tasks">
+                <p class="empty-state">Belum ada tugas di tanggal ini.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>� 2025 Smart Vibes | <strong>Orlando Owen Tan</strong></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
